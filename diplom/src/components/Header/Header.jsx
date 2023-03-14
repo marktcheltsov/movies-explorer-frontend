@@ -36,9 +36,9 @@ function Header({openSliderMenu, sliderMenuOpen}) {
                     </div>
                 </div>
                     <div class={`header__menu-burger ${sliderMenuOpen ? 'header__menu-burger_slider-opened' : ''}`} onClick={openSliderMenu}>
-                        <span class="header__menu-burger-item"></span>
-                        <span class="header__menu-burger-item"></span>
-                        <span class="header__menu-burger-item"></span>
+                        <span class={`header__menu-burger-item ${sliderMenuOpen ? 'header__menu-burger-item_active' : ''}`}></span>
+                        <span class={`header__menu-burger-item ${sliderMenuOpen ? 'header__menu-burger-item_active' : ''}`}></span>
+                        <span class={`header__menu-burger-item ${sliderMenuOpen ? 'header__menu-burger-item_active' : ''}`}></span>
                     </div>
             </header>
             )

@@ -1,5 +1,5 @@
 
-import searchLogo from '../../img/icons/search_icon.png'
+import searchLogo from '../../img/icons/search_icon.svg'
 import './Search.css';
 import SearchForm from '../SearchForm/SearchForm';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';

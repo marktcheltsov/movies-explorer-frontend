@@ -7,7 +7,7 @@ function Navigation({ isOpened, closeSlider }) {
             return (
                 <>
                     <Link to="/" className="header__menu-link"><li className="header__menu-link-text" onClick={closeSlider}>Главная</li></Link>
-                    <Link to="/movies" className="header__menu-link"><li className="header__menu-link-text" onClick={closeSlider}>Фильмы</li><span className="header__menu-link-text-active"></span></Link>
+                    <Link to="/movies" className="header__menu-link"><li className="header__menu-link-text" onClick={closeSlider}>Фильмы</li><div className="header__menu-link-text-active"></div></Link>
                     <Link to="/saved-movies" className="header__menu-link"><li className="header__menu-link-text" onClick={closeSlider}>Сохранённые фильмы</li></Link>
                 </>
             )
@@ -16,7 +16,7 @@ function Navigation({ isOpened, closeSlider }) {
                 <>
                     <Link to="/" className="header__menu-link"><li className="header__menu-link-text" onClick={closeSlider}>Главная</li></Link>
                     <Link to="/movies" className="header__menu-link"><li className="header__menu-link-text" onClick={closeSlider}>Фильмы</li></Link>
-                    <Link to="/saved-movies" className="header__menu-link"><li className="header__menu-link-text header__menu-link-text-active" onClick={closeSlider}>Сохранённые фильмы</li></Link>
+                    <Link to="/saved-movies" className="header__menu-link"><li className="header__menu-link-text" onClick={closeSlider}>Сохранённые фильмы</li><div className="header__menu-link-text-active"></div></Link>
                 </>
             )
         } else {

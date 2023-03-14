@@ -16,8 +16,6 @@
   
 .search__input-icon {
     margin: 19px 10px 19px 19px;
-    width: 34px;
-    height: 34px;
 }
   
 .search__form {
@@ -27,7 +25,7 @@
 }
   
 .search__input {
-    font-family: "Inter";
+    font-family: "Inter", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -51,7 +49,7 @@
     height: 34px;
     border: none;
     margin-right: 30px;
-    background-image: url(../../img/icons/search_btn_icon.png);
+    background-image: url(../../img/icons/search_btn_icon.svg);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -122,7 +120,7 @@
 }
   
 .search__filter-text {
-    font-family: "Inter";
+    font-family: "Inter", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 13px;

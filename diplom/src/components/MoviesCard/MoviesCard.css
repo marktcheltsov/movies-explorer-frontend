@@ -15,7 +15,7 @@
 }
   
 .film__description-name {
-    font-family: "Inter";
+    font-family: "Inter", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
@@ -24,7 +24,7 @@
 }
   
 .film__description-time {
-    font-family: "Inter";
+    font-family: "Inter", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
@@ -36,7 +36,7 @@
     width: 30px;
     height: 30px;
     background-color: #F9F9F9;
-    background-image: url(../../img/icons/icon__COLOR_stroke-2.png);
+    background-image: url(../../img/icons/like_off.svg);
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 100%;
@@ -46,12 +46,12 @@
   
 .film__description-like-btn_active {
     background-color: #2BE080;
-    background-image: url(../../img/icons/icon__COLOR_invisible.png);
+    background-image: url(../../img/icons/like_on.svg);
 }
 
 .film__description-like-btn_delete {
     background: #F9F9F9;
-    background-image: url(../../img/icons/delete.png);
+    background-image: url(../../img/icons/delete.svg);
     background-repeat: no-repeat;
     background-position: center;
 }
