@@ -1,0 +1,145 @@
+.technologies {
+    background: #F5F5F5;
+}
+  
+.technologies-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1140px;
+}
+  
+.technologies__title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    border-bottom: solid 1px #000000;
+    padding: 100px 0 23px 0;
+    margin: 0;
+}
+  
+.technologies__about-title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    margin: 90px 0 26px 0;
+}
+  
+.technologies__about-text {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    margin-bottom: 100px;
+    max-width: 460px;
+    margin: 0 auto 100px auto;
+}
+  
+.technologies__cards {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+    text-align: center;
+}
+  
+.technologies__card {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: -0.04em;
+    width: 90px;
+    height: 60px;
+    background: #E8E8E8;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+  
+.technologies__card:last-child {
+    margin: 0;
+}
+
+@media screen and (max-width: 1150px) {
+
+.technologies__cards {
+    padding-bottom: 90px;
+}
+    
+.technologies__card {
+    font-size: 12px;
+    line-height: 15px;
+    width: 84px;
+    height: 57px;
+}
+
+.technologies__about-text {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0 auto 83px auto;
+}
+    
+.technologies__about-title {
+    margin: 80px 0 22px 0;
+}
+    
+.technologies-container {
+    max-width: 668px;
+}
+    
+.technologies__title {
+    padding: 90px 0 23px 0;
+}
+}
+
+@media screen and (max-width: 720px) {
+
+.technologies {
+    background-color: #FFFFFF;
+}
+
+.technologies-container {
+    max-width: 284px;
+}
+    
+.technologies__title {
+    padding: 70px 0 28px 0;
+    font-size: 18px;
+    line-height: 22px;
+}
+    
+.technologies__about-title {
+    margin: 60px 0 24px 0;
+    font-size: 30px;
+    line-height: 36px;
+}
+
+.technologies__about-text {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 auto 50px auto;
+}
+
+.technologies__cards {
+    padding-bottom: 70px;
+    display: grid;
+    grid-template-columns: repeat(2, 84px);
+    gap: 10px;
+}
+
+.technologies__card {
+    margin: 0px;
+}
+}

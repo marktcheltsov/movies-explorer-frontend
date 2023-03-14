@@ -1,0 +1,74 @@
+.profile {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 410px;
+}
+  
+.profile__title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin: 74px 0 123px 0;
+}
+  
+.profile__description-content-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px #E8E8E8;
+    padding-bottom: 16px;
+}
+  
+.profile__description-content-container:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+    padding-top: 16px;
+    margin-bottom: 220px;
+}
+  
+.profile__description-about {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+}
+  
+.profile__description-title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+}
+  
+.profile__setings-btn {
+    display: block;
+    border: none;
+    background-color: inherit;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0 auto 16px auto;
+}
+  
+.profile__setings-btn:last-of-type {
+    margin: 0 auto;
+}
+  
+.profile__exit-btn {
+    color: #EE3465;
+}
+
+@media screen and (max-width: 720px) {
+
+.profile {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 260px;
+}
+}
