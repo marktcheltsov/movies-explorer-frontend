@@ -1,5 +1,4 @@
-https://www.figma.com/file/d9RVqG8FzCFt72ehVDP8Qn/Diploma-(Copy)?node-id=891%3A3857&t=tNbeKqMyhqfVllX4-0
-
+https://www.figma.com/file/cASM20ikAsPlTi2doec68Q/Diploma?node-id=891%3A3857&t=NOTsckqhrlaDks2d-0
 
 
 # Getting Started with Create React App
