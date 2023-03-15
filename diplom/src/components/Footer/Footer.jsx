@@ -5,10 +5,10 @@ import React from 'react';
 function Footer(){
     let location = useLocation()
     const renderFooter = () => {
-        if ( location.pathname === '/signin' || location.pathname === '/signup' || location.pathname === '/profile') {
+        if ( location.pathname === '/signin' || location.pathname === '/signup' || location.pathname === '/profile' || location.pathname === '/not-found') {
             return (
                 <></>
-            )
+            ) 
         } else {
             return (
                 <footer className="footer">

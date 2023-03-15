@@ -7,6 +7,7 @@ import Navigation from "../Navigation/Navigation";
 function Header({openSliderMenu, sliderMenuOpen}) {
     let location = useLocation()
     const renderHeader = () => {
+
         if (location.pathname === '/signin' || location.pathname === '/signup') {
             return (
                 <header className={`header header_small`}>
@@ -26,6 +27,11 @@ function Header({openSliderMenu, sliderMenuOpen}) {
                 </header>
             )
         }
+        else if (location.pathname === '/not-found') {
+            return (
+                <></>
+            )
+        }
         else {
             return (
                 <header className={`header`}>
@@ -35,10 +41,10 @@ function Header({openSliderMenu, sliderMenuOpen}) {
                         <Navigation isOpened={sliderMenuOpen} closeSlider={openSliderMenu}></Navigation>
                     </div>
                 </div>
-                    <div class={`header__menu-burger ${sliderMenuOpen ? 'header__menu-burger_slider-opened' : ''}`} onClick={openSliderMenu}>
-                        <span class={`header__menu-burger-item ${sliderMenuOpen ? 'header__menu-burger-item_active' : ''}`}></span>
-                        <span class={`header__menu-burger-item ${sliderMenuOpen ? 'header__menu-burger-item_active' : ''}`}></span>
-                        <span class={`header__menu-burger-item ${sliderMenuOpen ? 'header__menu-burger-item_active' : ''}`}></span>
+                    <div className={`header__menu-burger ${sliderMenuOpen ? 'header__menu-burger_slider-opened' : ''}`} onClick={openSliderMenu}>
+                        <span className={`header__menu-burger-item ${sliderMenuOpen ? 'header__menu-burger-item_active' : ''}`}></span>
+                        <span className={`header__menu-burger-item ${sliderMenuOpen ? 'header__menu-burger-item_active' : ''}`}></span>
+                        <span className={`header__menu-burger-item ${sliderMenuOpen ? 'header__menu-burger-item_active' : ''}`}></span>
                     </div>
             </header>
             )
@@ -52,4 +58,3 @@ function Header({openSliderMenu, sliderMenuOpen}) {
 }
 
 export default Header;
-//<Link to="/profile"><button className="header__profile-btn">Аккаунт</button></Link>
