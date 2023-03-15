@@ -128,4 +128,12 @@
         font-size: 12px;
         line-height: 15px;
     }
+
+    .sign__form {
+        margin-bottom: 240px; 
+    }
+
+    .sign__form_signin {
+        margin-bottom: 309px;
+    }
     }
