@@ -1,5 +1,5 @@
-import MoviesCardList from "../components/MoviesCardList/MoviesCardList";
-import Search from "../components/Search/Search";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Search from "../Search/Search";
 import './SavedMovies.css'
 
 function SavedMovies() {

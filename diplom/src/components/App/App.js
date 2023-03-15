@@ -8,7 +8,7 @@ import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
-import SavedMovies from "../../SavedMovies/SavedMovies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 
 function App() {
   const [ sliderMenuOpen , setSliderMenuOpen ] = useState(false);
