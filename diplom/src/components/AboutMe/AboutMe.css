@@ -65,6 +65,11 @@
     font-size: 14px;
     line-height: 17px;
     color: #000000;
+    cursor: pointer;
+}
+
+.about-me__link:hover {
+    opacity: 0.8;
 }
   
 .about-me__avatar {
@@ -110,7 +115,7 @@
     border-radius: 10px;
     -o-object-fit: cover;
       object-fit: cover;
-    width: 225px;
+    width: 255px;
     height: 307px;
 }
 

@@ -1,5 +1,5 @@
 .profile {
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     width: 100%;
     max-width: 410px;
 }
@@ -54,14 +54,24 @@
     font-size: 13px;
     line-height: 16px;
     margin: 0 auto 16px auto;
+    cursor: pointer;
 }
   
 .profile__setings-btn:last-of-type {
     margin: 0 auto;
 }
+
+.profile__setings-btn:hover {
+    opacity: 0.8;
+}
   
 .profile__exit-btn {
     color: #EE3465;
+    cursor: pointer;
+}
+
+.profile__exit-btn:hover {
+    opacity: 0.9;
 }
 
 @media screen and (max-width: 1150px) {

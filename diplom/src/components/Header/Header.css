@@ -25,6 +25,10 @@
     margin-right: 44px;
 }
 
+.header__menu-logo-sign {
+    cursor: pointer;
+}
+
 .header__menu-links {
     display: flex;
     align-items: center;
@@ -57,6 +61,10 @@
     text-decoration: none;
     color: #000000;
 }
+
+.header__menu-link:hover {
+    opacity: 0.8;
+}
   
 .header__menu-link:last-of-type {
     margin: 0;
@@ -79,6 +87,7 @@
     font-size: 14px;
     line-height: 16px;
     height: 32px;
+    cursor: pointer;
 }
 
 .header__register-btn {
@@ -92,6 +101,11 @@
     margin-right: 30px;
     color: #000000;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.header__register-btn:hover {
+    opacity: 0.8;
 }
 
 .header__login-btn {
@@ -106,6 +120,7 @@
     height: 32px;
     width: 76px;
     margin: 18px 0 18px 0;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1150px) {
@@ -280,12 +295,39 @@
     justify-content: space-around;
 }
 
+.header {
+    max-width: calc(100% - 30px);
+    margin-top: 23px;
+}
+
+.header_movies {
+    margin-top: 0;
+}
+
+.header__menu-logo {
+    margin: 4px 0 0px 0;
+}
+
 .header__menu-links {
     max-width: 100%;
 }
 
 .header__register-btn {
     margin: 0 14px 0 0;
+}
+
+.header__login-btn {
+    width: 54px;
+    height: 26px;
+    margin: 20px 0 15px 0;
+    font-size: 10px;
+    line-height: 16px;
+}
+
+.header__register-btn {
+    font-size: 10px;
+    line-height: 16px;
+    width: 64px;
 }
 
 .header__menu-link:first-child {

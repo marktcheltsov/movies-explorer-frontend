@@ -11,7 +11,7 @@ function Header({openSliderMenu, sliderMenuOpen}) {
         if (location.pathname === '/signin' || location.pathname === '/signup') {
             return (
                 <header className={`header header_small`}>
-                    <div className="header__menu-logo"></div>
+                    <Link to="/"><div className="header__menu-logo header__menu-logo-sign"></div></Link>
                 </header>
             )
         } else if (location.pathname === '/') {
@@ -34,7 +34,7 @@ function Header({openSliderMenu, sliderMenuOpen}) {
         }
         else {
             return (
-                <header className={`header`}>
+                <header className={`header header_movies`}>
                 <div className="header__menu"> 
                 <div className="header__menu-logo"></div>
                     <div className={`header__menu-links-container ${sliderMenuOpen ? 'header__menu-links-container_slider-opened' : ''}`}>

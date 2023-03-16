@@ -17,7 +17,7 @@ function App() {
 
   const location = useLocation()
 
-  function protectRout() {
+  function protectRoute() {
   if (location.pathname === "/") {
     return true
   } else if (location.pathname === "/movies") {
@@ -43,8 +43,9 @@ function App() {
   }
 
   return (
-    <div className="page">
+    <div className="app">
       <Header openSliderMenu={ openSliderMenu } sliderMenuOpen={ sliderMenuOpen }></Header>
+      <main>
       <Switch>
           <Route exact path="/">
             <Main/>
@@ -67,8 +68,9 @@ function App() {
           <Route exact path="/not-found">
             <NotFound/>
           </Route>
-          {protectRout()}
+          {protectRoute()}
       </Switch>
+      </main>
       <Footer></Footer>
     </div>
   );
