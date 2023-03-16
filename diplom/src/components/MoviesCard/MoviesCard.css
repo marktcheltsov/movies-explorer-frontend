@@ -1,0 +1,87 @@
+.film {
+    width: 364px;
+    background: #FDFDFD;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+  
+.film__description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+  
+.film__description-text-container {
+    margin: 14px 0px 14px 14px;
+}
+  
+.film__description-name {
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    margin-bottom: 9px;
+}
+  
+.film__description-time {
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #A0A0A0;
+}
+  
+.film__description-like-btn {
+    width: 30px;
+    height: 30px;
+    background-color: #F9F9F9;
+    background-image: url(../../img/icons/like_off.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 100%;
+    margin: 19px 14px 19px 0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+  
+.film__description-like-btn_active {
+    background-color: #2BE080;
+    background-image: url(../../img/icons/like_on.svg);
+}
+
+.film__description-like-btn_delete {
+    background: #F9F9F9;
+    background-image: url(../../img/icons/delete.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+  
+.film__image {
+    width: 364px;
+    height: 203px;
+    display: block;
+}
+
+@media screen and (max-width: 1150px) {
+.film {
+    width: 339px;
+}
+
+.film__image {
+    width: 339px;
+    height: 190px;
+}
+}
+
+@media screen and (max-width: 720px) {
+
+.film {
+     width: 300px;
+}
+
+.film__image {
+    width: 300px;
+    height: 168px;
+}
+}

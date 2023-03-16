@@ -1,0 +1,147 @@
+.sign {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 396px;
+}
+  
+.sign__title {
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 22px 0 40px 0;
+}
+  
+.sign__form .sign__submit-btn {
+    margin-top: 134px;
+}
+
+.sign__form-signin .sign__submit-btn {
+    margin-top: 221px;
+}
+
+
+  
+.sign__label {
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A0A0A0;
+    display: block;
+    margin-bottom: 24px;
+}
+  
+.sign__input {
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    border: none;
+    border-bottom: solid 1px #E8E8E8;
+    padding: 0;
+    display: block;
+    width: 100%;
+    height: 32px;
+}
+
+.sign__input:focus {
+    border-bottom: solid 1px #2BE080;
+}
+
+.sign__label:last-of-type {
+    margin: 0;
+}
+  
+.sign__submit-btn {
+    background-color: #2BE080;
+    width: 100%;
+    height: 45px;
+    color: #ffffff;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.sign__link:hover {
+    opacity: 0.8;
+}
+  
+.sign__link-description {
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A0A0A0;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 20px;
+}
+  
+.sign__link {
+    color: #2BE080;
+    text-decoration: none;
+    margin-left: 6px;
+}
+  
+.sign__logo {
+    width: 38px;
+    height: 38px;
+    margin: 0 0 0 0;
+    background-image: url(../../img/icons/logo.svg);
+    margin-top: 70px;
+}
+
+@media screen and (max-width: 1150px) {
+
+.sign__logo {
+    margin-top: 232px;
+}
+
+}
+
+@media screen and (max-width: 720px) {
+
+    .sign__link-description {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .sign {
+        max-width: 260px;
+    }
+    
+    .sign__title {
+        margin-bottom: 80px;
+        text-align: center;
+    }
+    
+    .sign__input {
+         max-width: 260px;
+    }
+    
+    .sign__submit-btn {
+        max-width: 260px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .sign__form .sign__submit-btn {
+        margin-top: 240px; 
+    }
+
+    .sign__form-signin .sign__submit-btn {
+        margin-top: 309px;
+    }
+    }
