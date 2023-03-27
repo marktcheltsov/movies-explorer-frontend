@@ -6,7 +6,7 @@ import { login } from "../../utils/Auth";
 function Login({setLoggedIn}) {
     let history = useHistory()
 
-    function formhandleSubmit(email, password) {
+    function formHandleSubmit(email, password) {
             login(email, password).then((res)=> {
             localStorage.setItem('token', res.jwt);
             localStorage.getItem('token')
@@ -19,7 +19,7 @@ function Login({setLoggedIn}) {
     return (
         <section className="sign">
             <h2 className="sign__title">Рады видеть!</h2>
-            <SignForm btnText="Войти" formhandleSubmit={formhandleSubmit}></SignForm>
+            <SignForm btnText="Войти" formhandleSubmit={formHandleSubmit}></SignForm>
             <p className="sign__link-description">Ещё не зарегистрированы?<Link to="/signup" className="sign__link">Регистрация</Link></p>
         </section>
     )
