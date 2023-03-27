@@ -4,7 +4,7 @@ import React from "react";
 import Navigation from "../Navigation/Navigation";
 
 
-function Header({openSliderMenu, sliderMenuOpen}) {
+function Header({openSliderMenu, sliderMenuOpen, loggedIn}) {
     let location = useLocation()
     const renderHeader = () => {
 
@@ -14,7 +14,13 @@ function Header({openSliderMenu, sliderMenuOpen}) {
                     <Link to="/"><div className="header__menu-logo header__menu-logo-sign"></div></Link>
                 </header>
             )
-        } else if (location.pathname === '/') {
+            
+        }else if (location.pathname === '/not-found') {
+            return (
+                <></>
+            )
+        } 
+        else if (!loggedIn) {
             return(
                 <header className={`header`}>
                     <div className="header__menu"> 
@@ -27,16 +33,11 @@ function Header({openSliderMenu, sliderMenuOpen}) {
                 </header>
             )
         }
-        else if (location.pathname === '/not-found') {
-            return (
-                <></>
-            )
-        }
         else {
             return (
                 <header className={`header header_movies`}>
                 <div className="header__menu"> 
-                <div className="header__menu-logo"></div>
+                <Link to="/"><div className="header__menu-logo"></div></Link>
                     <div className={`header__menu-links-container ${sliderMenuOpen ? 'header__menu-links-container_slider-opened' : ''}`}>
                         <Navigation isOpened={sliderMenuOpen} closeSlider={openSliderMenu}></Navigation>
                     </div>

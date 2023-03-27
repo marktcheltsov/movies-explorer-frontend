@@ -73,6 +73,12 @@
     cursor: pointer;
 }
 
+.sign__submit-btn_disabled {
+    background-color: #ffffff;
+    color: gray;
+    border: 1px solid gray;
+}
+
 .sign__link:hover {
     opacity: 0.8;
 }

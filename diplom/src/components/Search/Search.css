@@ -113,22 +113,22 @@
     transition: 0.4s;
 }
 
-.search__filter-btn-input:focus + .search__filter-btn-slider {
+.search__filter-btn-input_active + .search__filter-btn-slider {
     background: #EBEBEB;
     cursor: pointer;
 }
 
-.search__filter-btn-input:not(:checked) + .search__filter-btn-slider {
+.search__filter-btn-input + .search__filter-btn-slider {
     background: #2BE080;
     cursor: pointer;
 }
 
-.search__filter-btn-input:checked + .search__filter-btn-slider {
+.search__filter-btn-input_active + .search__filter-btn-slider {
     background: #EBEBEB;
     cursor: pointer;
 }
 
-.search__filter-btn-input:checked + .search__filter-btn-slider::before {
+.search__filter-btn-input_active + .search__filter-btn-slider::before {
     transform: translateX(-16px);
     cursor: pointer;
 }

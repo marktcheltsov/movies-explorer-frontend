@@ -1,12 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import './Login.css'
 import SignForm from '../SignForm/SignForm';
+import { login } from "../../utils/Auth";
 
-function Login() {
+function Login({setLoggedIn}) {
+    let history = useHistory()
+
+    function formhandleSubmit(email, password) {
+            login(email, password).then((res)=> {
+            localStorage.setItem('token', res.jwt);
+            localStorage.getItem('token')
+            setLoggedIn(true)
+            history.push("/movies")
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
     return (
         <section className="sign">
             <h2 className="sign__title">Рады видеть!</h2>
-            <SignForm btnText="Войти"></SignForm>
+            <SignForm btnText="Войти" formhandleSubmit={formhandleSubmit}></SignForm>
             <p className="sign__link-description">Ещё не зарегистрированы?<Link to="/signup" className="sign__link">Регистрация</Link></p>
         </section>
     )

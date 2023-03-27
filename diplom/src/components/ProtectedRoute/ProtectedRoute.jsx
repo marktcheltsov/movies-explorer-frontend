@@ -1,16 +1,12 @@
 import React from "react";
-import { Route, Redirect, useLocation } from "react-router-dom";
+import { Route, Redirect, useHistory } from "react-router-dom";
 
-const ProtectedRoute = () => {
-    const location = useLocation()
-    
+const ProtectedRoute = ({ component: Component, ...props }) => {
+  let history = useHistory()
   return (
     <Route>
-      {() => {
-        if (location.pathname !== "/" || location.pathname !== "/movies" || location.pathname !== "saved-movies" || location.pathname !== "profile" || location.pathname !== "signup" || location.pathname !== "signin") {
-            <Redirect to="/not-found" />
-        }
-      }
+      {() =>
+        props.loggedIn ? <Component {...props}/> : <Redirect to="/" />
       }
     </Route>
   );

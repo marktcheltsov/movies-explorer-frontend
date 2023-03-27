@@ -66,6 +66,12 @@
     margin-bottom: 16px;
     cursor: pointer;
 }
+
+.sign__submit-btn_disabled {
+    background-color: #ffffff;
+    color: gray;
+    border: 1px solid gray;
+}
   
 .sign__link-description {
     font-family: "Inter", Arial, Helvetica, sans-serif;

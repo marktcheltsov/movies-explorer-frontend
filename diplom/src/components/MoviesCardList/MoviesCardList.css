@@ -9,6 +9,14 @@
     border-top: 1px solid #E8E8E8;
 }
 
+.films_zero-films {
+    height: calc(371px);
+}
+
+.films_btn-disabled {
+    margin-bottom: 140px;
+}
+
 @media screen and (max-width: 1150px) {
 
 .films {
@@ -16,7 +24,18 @@
     grid-template-columns: repeat(2, 339px);
     gap: 36px 30px;
 }
+
+.films_zero-films {
+    height: calc(652px);
 }
+
+
+.films_btn-disabled {
+    margin-bottom: 80px;
+}
+
+}
+
 
 @media screen and (max-width: 720px) {
 
@@ -25,5 +44,9 @@
     grid-template-columns: repeat(1, 300px);
     gap: 16px;
     padding-top: 29px;
+}
+
+.films_zero-films {
+    height: 558px;
 }
 }
