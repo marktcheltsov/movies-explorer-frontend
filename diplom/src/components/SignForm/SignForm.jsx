@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
-import { validator } from 'validator';
 import isEmail from 'validator/lib/isEmail';
 
 function SignForm({btnText, formhandleSubmit}) {
@@ -116,9 +115,9 @@ function SignForm({btnText, formhandleSubmit}) {
                 return (
                     <form className="sign__form sign__form-signin" noValidate>
                         <label className="sign__label">
-                            E-mail
-                            <input type="email" className="sign__input" name="name" value={email} onBlur={e => blurHandle(e)} required onChange={handleChangeInputEmail}/>
-                            {(emailDirty && emailError) && <p className="sign__error-text">{emailError}</p>}
+                        E-mail
+                        <input type="email" className="sign__input" name="email" value={email} required onBlur={e => blurHandle(e)} onChange={handleChangeInputEmail}/>
+                        {(emailDirty && emailError) && <p className="sign__error-text">{emailError}</p>}
                         </label>
                         <label className="sign__label">
                             Пароль

@@ -87,13 +87,16 @@ function setCards() {
   useEffect(()=> {
     const moviesStorage = JSON.parse(localStorage.getItem('movies'));
     const setingsStorage = JSON.parse(localStorage.getItem('searchSettings'));
-    if (moviesStorage.length !== 0) {
-      setFilterSetings(setingsStorage)
-      setGetCards(false)
-      setSubmitFromCards(setingsStorage, moviesStorage);
-      setMovies(moviesStorage);
-      dispatch(getMoviesData(moviesStorage));
+    if (moviesStorage) {
+      if (moviesStorage.length !== 0) {
+        setFilterSetings(setingsStorage)
+        setGetCards(false)
+        setSubmitFromCards(setingsStorage, moviesStorage);
+        setMovies(moviesStorage);
+        dispatch(getMoviesData(moviesStorage));
+      }
     }
+
   }, [])
 
   function getMovies(setings) {
@@ -130,42 +133,3 @@ function setCards() {
 }
 
 export default Movies;
-
-/*localStorage.setItem('searchSettings', JSON.stringify(setings))
-if (movieEnought) {
-  const newFilms = arr.filter(film => filterMovies(film, setings.word, isCyrillic(setings.word), setLangOfSearch));
-  setFiltredCardsLength(newFilms.length)
-  if (newFilms.length - 1 === filtredMoviesCounter) {
-      setGetCards(false)
-      return
-  }
-  if (setings.btnValue) {
-    newFilms = newFilms.filter(film => filterDuration(film));
-    setFiltredCardsLength(newFilms.length)
-  }
-  if (newFilms.length === 0) {
-    setErrorFilms(false);
-    setErrorFilmsText('Ничего не найдено');
-    return
-  }
-  setErrorFilms(true);
-  if (!getCards) {
-    renderCardsOnClick(newFilms, filtredMovies, setFiltredMovies, filtredMoviesCounter, setFiltredMoviesCounter, moviesSize)
-    if (newFilms.length > 3){
-      setGetCards(true)
-    }
-    console.log(newFilms)
-    console.log(filtredCardsLength, filtredMoviesCounter)
-    if (filtredCardsLength <= filtredMoviesCounter) {
-      console.log('s')
-      setGetCards(false)
-    }
-  } else {
-    renderCardsOnClick(newFilms, filtredMovies, setFiltredMovies, filtredMoviesCounter, setFiltredMoviesCounter, moviesSize)
-    console.log(filtredCardsLength, filtredMoviesCounter)
-    if (filtredCardsLength <= filtredMoviesCounter) {
-      console.log('s')
-      setGetCards(false)
-    }
-  }
-}*/
