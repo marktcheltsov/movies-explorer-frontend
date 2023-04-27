@@ -1,10 +1,9 @@
 import './MoviesCard.css'
 import { useLocation } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import myApi from '../../utils/MainApi';
 
 function MoviesCard({time, img, data, onClickLikeMovie, langOfSearch, onClickRemoveMovie}) {
-    
     let location = useLocation();
     const [isliked, setIsliked] = useState(false);
     const islikedCard = location.pathname === '/saved-movies'
@@ -36,12 +35,9 @@ function MoviesCard({time, img, data, onClickLikeMovie, langOfSearch, onClickRem
                 removeLikeCard()
             } else {
                 AddLikeCard()
-                data.liked = false
             }
         }
     }
-
-
 
     function filterTime(time) {
         const min = time % 60;
@@ -71,4 +67,5 @@ function MoviesCard({time, img, data, onClickLikeMovie, langOfSearch, onClickRem
         </div>
     )
 }
+
 export default MoviesCard;

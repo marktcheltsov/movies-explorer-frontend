@@ -1,86 +1,37 @@
 import { useContext, useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
-import isEmail from 'validator/lib/isEmail';
-import myApi from '../../utils/MainApi';
+import { useForm, useWatch } from "react-hook-form";
 import CurrentUserContext from '../../utils/UserContext';
 import './Profile.css'
 
-function Profile({path, onClickProfileExitLink}){
-    const [ name, setName ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ emailDirty, setEmailDirty] = useState(false);
-    const [ nameDirty, setNameDirty] = useState(false);
-    const [ emailError, setEmailError] = useState('email не может быть пыстым');
-    const [ nameError, setNameError] = useState('имя не может быть пыстым');
-    const [ formValid, setFormFalid ] = useState(false);
-    const [ btnText, setBtnText] = useState('Редактировать')
-
+function Profile({path, onClickProfileExitLink, handleSubmitForm, profileCorrect}){
+    const { register, handleSubmit, control, formState: { errors }, setValue} = useForm({mode: "onChange"});
+    const [formDisabled, setFormDisabled] = useState(false);
     let user = useContext(CurrentUserContext);
 
-    function handleSumbitForm(e) {
-        e.preventDefault()
-        myApi.updateUser(name, email).then((res)=> {
-            user = res
-            setBtnText('ВЫ УСПЕШНО ОБНОВИЛИ ПРОФИЛЬ');
-            setTimeout(() => {
-            setBtnText('Редактировать');
-            }, 1000);
-        }).catch((err)=> {
-            console.log(err)
-        })
-    }
+    const watchedFields = useWatch({ control });
+    const hasError = errors.name || errors.email;
 
-    useEffect(()=> {
-        setEmail(user.email);
-        setName(user.name);
+    useEffect(()=>{
+        setValue('name', user.name)
+        setValue('email', user.email)
     }, [user])
 
-    useEffect(()=> {
-            if (emailError || nameError) {
-                setFormFalid(false)
-            } else {
-                setFormFalid(true)
-            }
-    }, [emailError, nameError])
 
-    useEffect(()=> {
-        if (user.name === name && user.email === email) {
-            setFormFalid(false)
-        }
-    }, [emailDirty, nameDirty])
 
-    function handleChangeInputEmail(e) {
-        setEmail(e.target.value)
-        console.log(isEmail(e.target.value))
-        setFormFalid(false)
-        if (isEmail(e.target.value) === false) {
-            setEmailError('email не коректен');
+    useEffect(() => {
+        if (user.name === watchedFields.name && user.email === watchedFields.email) {
+            setFormDisabled(true)
         } else {
-            setEmailError('');
+            setFormDisabled(false)
         }
-    }
+      }, [watchedFields.name, watchedFields.email]);
 
-    function handleChangeInputName(e) {
-        setName(e.target.value)
-        if (e.target.value.length === 0) {
-            setNameError('имя не может быть пыстым');
+    function submitSubmit(data) {
+        if (user.name === data.name && user.email === data.email) {
+            return 
         } else {
-            setNameError('');
-        }
-    }
-
-
-
-    const blurHandle = (e)=> {
-        switch (e.target.name) {
-            case 'email':
-                setEmailDirty(true)
-                break
-            case 'name':
-                setNameDirty(true)
-                break
-            default :
-                return
+            handleSubmitForm(data)
         }
     }
 
@@ -88,24 +39,50 @@ function Profile({path, onClickProfileExitLink}){
         <Route path={path}>
         <section class="profile">
             <h2 class="profile__title">Привет, {user.name}!</h2>
+            <form action="" onSubmit={handleSubmit(submitSubmit)}>
             <div class="profile__description">
-
                 <div class="profile__description-content-container">
                     <p class="profile__description-about">Имя</p>
                     <div className='profile__description-input-container'>
-                    <input  className='profile__description-input' value={name || ''} name='name' onBlur={e => blurHandle(e)} type="text" onChange={handleChangeInputName}/>
-                    {(nameDirty && nameError) && <p className="profile__description-error-text">{nameError}</p>}
+                    <input  
+                    className='profile__description-input'
+                    name='name'
+                    type="text"
+                    {...register('name', {
+                        required: 'поле обзательно',
+                        minLength: {
+                            value: 2,
+                            message: 'поле должно быть болбше 2х символов'
+                        },
+                    })}
+                    />
+                    {errors?.name && <p className="profile__description-error-text">{errors?.name?.message || 'error'}</p>}
                     </div>
                 </div>
                 <div class="profile__description-content-container">
                     <p class="profile__description-about">E-mail</p>
                     <div className='profile__description-input-container'>
-                    <input  className='profile__description-input'value={email || ''} name='email' onBlur={e => blurHandle(e)} type="text" onChange={handleChangeInputEmail}/>
-                        {(emailDirty && emailError) && <p className="profile__description-error-text">{emailError}</p>}
+                    <input 
+                    className='profile__description-input' 
+                    name='email' 
+                    type="text"
+                    {...register('email', {
+                        required: 'поле обзательно',
+                        minLength: {
+                            value: 2,
+                            message: 'поле должно быть болбше 2х символов'
+                        },
+                        pattern: {
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                            message: 'эмаил долден быть валидным'
+                        }
+                    })}/>
+                        {errors?.email && <p className="profile__description-error-text">{errors?.email?.message || 'error'}</p>}
                     </div>
                 </div>
             </div>
-            <button disabled={!formValid} onClick={handleSumbitForm} class={`profile__setings-btn profile__edit-btn`} type='submit' >{btnText}</button>
+            <button class={`profile__setings-btn profile__edit-btn`} disabled={formDisabled || hasError} type='submit'>{profileCorrect ? 'вы успешно обновили профиль' : 'редактировать'}</button>
+            </form>
             <button class="profile__setings-btn profile__exit-btn" onClick={onClickProfileExitLink}>Выйти из аккаунта</button>
         </section>
         </Route>

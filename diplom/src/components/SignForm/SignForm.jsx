@@ -1,134 +1,106 @@
-import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom"
-import isEmail from 'validator/lib/isEmail';
 
 function SignForm({btnText, formhandleSubmit}) {
-    const [ name, setName ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
-    const [ emailDirty, setEmailDirty] = useState(false);
-    const [ passwordDirty, setPasswordDirty] = useState(false);
-    const [ nameDirty, setNameDirty] = useState(false);
-    const [ emailError, setEmailError] = useState('email не может быть пыстым');
-    const [ nameError, setNameError] = useState('имя не может быть пыстым');
-    const [ passwordError, setPasswordError] = useState('пароль не может быть пыстым');
-    const [ formValid, setFormFalid ] = useState(false);
+    const { register, handleSubmit, formState: { errors, isValid  } } = useForm({mode: "onBlur"});
     let location = useLocation();
-
-    function handleSumbitForm(e) {
-        e.preventDefault()
-        if (location.pathname === '/signin') {
-            formhandleSubmit(email, password)
-        } else {
-            formhandleSubmit(name, email, password)
-        }
-    }
-
-    useEffect(()=> {
-        if (location.pathname === '/signup') {
-            if (emailError || nameError || passwordError) {
-                setFormFalid(false)
-            } else {
-                setFormFalid(true)
-            }
-        } else {
-            if (emailError || passwordError) {
-                setFormFalid(false)
-            } else {
-                setFormFalid(true)
-            }
-        }
-    }, [emailError, nameError, passwordError])
-
-    function handleChangeInputEmail(e) {
-        setEmail(e.target.value)
-        console.log(isEmail(e.target.value))
-        if (isEmail(e.target.value) === false) {
-            setEmailError('email не коректен');
-        } else {
-            setEmailError('');
-        }
-    }
-
-    function handleChangeInputPassword(e) {
-        setPassword(e.target.value)
-        if (e.target.value.length === 0) {
-            setPasswordError('пароль не может быть пыстым');
-        } else if (e.target.value.length < 3) {
-            setPasswordError('пароль должен быть больше 3 символов');
-        } else {
-            setPasswordError('');
-        }
-    }
-
-    function handleChangeInputName(e) {
-        setName(e.target.value)
-        if (e.target.value.length === 0) {
-            setNameError('имя не может быть пыстым');
-        } else {
-            setNameError('');
-        }
-    }
-
-
-
-    const blurHandle = (e)=> {
-        switch (e.target.name) {
-            case 'email':
-                setEmailDirty(true)
-                break
-            case 'password':
-                setPasswordDirty(true)
-                break
-            case 'name':
-                setNameDirty(true)
-                break
-            default :
-                return
-        }
-    }
 
     function renderSignForm() {
         if (location.pathname === '/signup'){
             return (
-                <form className="sign__form" noValidate> 
+                <form className="sign__form" noValidate onSubmit={handleSubmit(formhandleSubmit)}> 
                     <label className="sign__label">
                         Имя
-                        <input type="text" className="sign__input" name="name" value={name} required minLength="2" maxLength="30" onChange={handleChangeInputName} onBlur={e => blurHandle(e)}/>
-                        {(nameDirty && nameError) && <p className="sign__error-text">{nameError}</p>}
+                        <input type="text" 
+                            className="sign__input"
+                            name="name"
+                            {...register('name', {
+                                required: 'поле обзательно',
+                                minLength: {
+                                    value: 2,
+                                    message: 'поле должно быть болбше 2х символов'
+                                },
+                        })}/>
+                        {errors?.name && <p className="profile__description-error-text">{errors?.name?.message || 'error'}</p>}
                     </label>
                     <label className="sign__label">
-                        E-mail
-                        <input type="email" className="sign__input" name="email" value={email} required onBlur={e => blurHandle(e)} onChange={handleChangeInputEmail}/>
-                        {(emailDirty && emailError) && <p className="sign__error-text">{emailError}</p>}
+                    E-mail
+                        <input 
+                        type="email" 
+                        className="sign__input" 
+                        name="email" 
+                        {...register('email', {
+                            required: 'поле обзательно',
+                            minLength: {
+                                value: 2,
+                                message: 'поле должно быть болбше 2х символов'
+                            },
+                            pattern: {
+                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                message: 'эмаил должен быть валидным'
+                            }
+                        })}/>
+                        {errors?.email && <p className="sign__error-text">{errors?.email?.message || 'error'}</p>}
                     </label>
-                    <label className="sign__label" required>
-                        Пароль
-                        <input type="password" className="sign__input" name="password" value={password} onBlur={e => blurHandle(e)} required onChange={handleChangeInputPassword}/>
-                        {(passwordDirty && passwordError) && <p className="sign__error-text">{passwordError}</p>}
-                        <button disabled={!formValid} onClick={handleSumbitForm} className={`sign__submit-btn ${formValid ? '' : 'sign__submit-btn_disabled'}`} type="submit">{btnText}</button>
+                    <label className="sign__label">
+                    Пароль
+                        <input type="password"
+                         className="sign__input"
+                          name="password"
+                          {...register('password', {
+                            required: 'поле обзательно',
+                            minLength: {
+                                value: 2,
+                                message: 'поле должно быть болбше 2х символов'
+                            }
+                        })}/>
+                        {errors?.password && <p className="sign__error-text">{errors?.password?.message || 'error'}</p>}
+                    <button className={`sign__submit-btn ${isValid ? '' : 'sign__submit-btn_disabled'}`} type="submit">{btnText}</button>
                     </label>
                 </form>
 
             )   
             } else {
                 return (
-                    <form className="sign__form sign__form-signin" noValidate>
-                        <label className="sign__label">
+                <form className="sign__form sign__form-signin" noValidate onSubmit={handleSubmit(formhandleSubmit)}>
+                    <label className="sign__label">
                         E-mail
-                        <input type="email" className="sign__input" name="email" value={email} required onBlur={e => blurHandle(e)} onChange={handleChangeInputEmail}/>
-                        {(emailDirty && emailError) && <p className="sign__error-text">{emailError}</p>}
-                        </label>
-                        <label className="sign__label">
-                            Пароль
-                            <input type="password" className="sign__input" name="password" value={password} onBlur={e => blurHandle(e)} required onChange={handleChangeInputPassword}/>
-                            {(passwordDirty && passwordError) && <p className="sign__error-text">{passwordError}</p>}
-                        </label>
-                        <button disabled={!formValid} onClick={handleSumbitForm} className={`sign__submit-btn ${formValid ? '' : 'sign__submit-btn_disabled'}`} type="submit">{btnText}</button>
-                    </form>
+                        <input 
+                        type="email" 
+                        className="sign__input" 
+                        name="email" 
+                        {...register('email', {
+                            required: 'поле обзательно',
+                            minLength: {
+                                value: 2,
+                                message: 'поле должно быть болбше 2х символов'
+                            },
+                            pattern: {
+                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                message: 'эмаил долден быть валидным'
+                            }
+                        })}/>
+                        {errors?.email && <p className="sign__error-text">{errors?.email?.message || 'error'}</p>}
+                    </label>
+                    <label className="sign__label">
+                    Пароль
+                        <input type="password"
+                         className="sign__input"
+                          name="password"
+                          {...register('password', {
+                            required: 'поле обзательно',
+                            minLength: {
+                                value: 2,
+                                message: 'поле должно быть болбше 2х символов'
+                            }
+                        })}/>
+                        {errors?.password && <p className="sign__error-text">{errors?.password?.message || 'error'}</p>}
+                    </label>
+                    <button className={`sign__submit-btn ${isValid ? '' : 'sign__submit-btn_disabled'}`} type="submit">{btnText}</button>
+                </form>
                 )
+            }
         }
-    }
     return (
         <>
             {renderSignForm()}

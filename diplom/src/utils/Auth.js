@@ -28,16 +28,3 @@ export const login = (email, password) => {
   })
   .then(response => getResponseData(response, 200))
 };
-
-export const getUserInfo = (jwt) => { 
-  return fetch('https://auth.nomoreparties.co/users/me', {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json",
-      "authorization" : `Bearer ${jwt}`
-    },
-  })
-  .then((response) => {
-    getResponseData(response, 200)
-  })
-};

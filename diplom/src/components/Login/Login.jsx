@@ -1,4 +1,4 @@
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import './Login.css'
 import SignForm from '../SignForm/SignForm';
 import { login } from "../../utils/Auth";
@@ -6,8 +6,8 @@ import { login } from "../../utils/Auth";
 function Login({setLoggedIn}) {
     let history = useHistory()
 
-    function formHandleSubmit(email, password) {
-            login(email, password).then((res)=> {
+    function formHandleSubmit(data) {
+            login(data.email, data.password).then((res)=> {
             localStorage.setItem('token', res.jwt);
             localStorage.getItem('token')
             setLoggedIn(true)
@@ -16,6 +16,7 @@ function Login({setLoggedIn}) {
             console.log(err)
         })
     }
+    
     return (
         <section className="sign">
             <h2 className="sign__title">Рады видеть!</h2>

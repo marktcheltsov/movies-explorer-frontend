@@ -5,37 +5,44 @@ import SearchForm from '../SearchForm/SearchForm';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useEffect, useState } from 'react';
 
-function Search({filterCards, getMovies}) {
+function Search({ handleSubmitForm, setingsName, movies }) {
     const [inputValue, setInputValue] = useState('');
     const [checkBoxValue, setCheckBoxValue] = useState(false);
 
     useEffect(()=> {
-        const setings = JSON.parse(localStorage.getItem('searchSettings'));
-        if (setings) {
-            console.log(setings)
-            setCheckBoxValue(setings.btnValue);
-            setInputValue(setings.word);
+        const storg = JSON.parse(localStorage.getItem(setingsName))
+        if (storg) {
+            if (storg.settings) {
+            setCheckBoxValue(storg.settings.btnValue);
+            setInputValue(storg.settings.word);
+            }
         };
       }, []);
 
     function handleChexBox() {
         if (checkBoxValue) {
             setCheckBoxValue(false);
+            if (movies.length !== 0) {
+                handleSubmitForm({word: inputValue, btnValue: false})
+            }
         } else {
             setCheckBoxValue(true);
+            if (movies.length !== 0) {
+                handleSubmitForm({word: inputValue, btnValue: true})
+            }
         };
     };
 
     function formSubmitHandle(e) {
         e.preventDefault();
-        getMovies({word: inputValue, btnValue: checkBoxValue});
+        handleSubmitForm({word: inputValue, btnValue: checkBoxValue})
     };
     
 return (
     <section className="search">
         <div className="search__input-container">
             <img src={searchLogo} alt="иконка" className="search__input-icon"/>
-            <SearchForm setInputValue={setInputValue} inputValue={inputValue} formSubmitHandle={formSubmitHandle} filterCards={filterCards}></SearchForm>
+            <SearchForm setInputValue={setInputValue} inputValue={inputValue} formSubmitHandle={formSubmitHandle}></SearchForm>
         </div>
         <FilterCheckbox handleChexBox={handleChexBox} checkBoxValue={checkBoxValue}></FilterCheckbox>
     </section>

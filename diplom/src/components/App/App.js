@@ -2,7 +2,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import './App.css';
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation, Redirect, useHistory } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
@@ -14,15 +14,14 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import myApi from "../../utils/MainApi";
 import CurrentUserContext from "../../utils/UserContext";
 
-
-
 function App() {
   const [sliderMenuOpen, setSliderMenuOpen] = useState(false);
   const [movies, setMovies] = useState([]);
   const [likedMovies, setLikedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setСurrentUser] = useState({});
-  
+  const [filtredMovies, setFiltredMovies] = useState([]);
+  const [profileCorrect, setProfileCorrect] = useState(false)
   const location = useLocation();
   const history = useHistory();
 
@@ -31,14 +30,29 @@ function App() {
   }
 
   function onClickRemoveMovie(film) {
+    setFiltredMovies((item) =>
+    item.filter((element) => element !== film));
     setLikedMovies((item) =>
-    item.filter((element) => element !== film)
-    );
+    item.filter((element) => element !== film));
   }
 
   function onClickProfileExitLink() {
-    localStorage.removeItem('token');
+    localStorage.clear()
     setLoggedIn(false)
+  }
+
+  function handleSubmitForm(data) {
+      if (!profileCorrect) {
+        myApi.updateUser(data.name, data.email)
+        .catch(e => console.log(e))
+        .then((res)=> {
+          setСurrentUser(res)
+          setProfileCorrect(true)
+          setTimeout(() => {
+            setProfileCorrect(false)
+          }, 1500);
+        })
+      }
   }
 
   useEffect(() => {
@@ -48,13 +62,20 @@ function App() {
     } else {
       history.push("/movies")
       setLoggedIn(true)
-      myApi.getUserInfoFromServer().then((res)=> {
+      myApi.getUserInfoFromServer()
+        .then((res)=> {
         setСurrentUser(res);
       }).catch((err)=>{
         console.log(err)
       })
+      myApi.getLikedMovies().then((res)=> {
+        res.forEach(element => {element.liked = true});
+        setLikedMovies(res)
+    }).catch((err)=>{
+        console.log(err)
+      })
     }
-    }, []);
+    }, [loggedIn]);
 
   function protectRoute() {
   if (location.pathname === "/") {
@@ -79,6 +100,7 @@ function App() {
   function openSliderMenu() {
     setSliderMenuOpen(!sliderMenuOpen)
   }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="app">
@@ -91,13 +113,16 @@ function App() {
           path="/movies"
           loggedIn={loggedIn}
           onClickLikeMovie={onClickLikeMovie}
-          onClickRemoveMovie={onClickRemoveMovie}>
+          onClickRemoveMovie={onClickRemoveMovie}
+          likedMovies={likedMovies}>
         </ProtectedRoute>
         <ProtectedRoute 
           component={Profile}
           path="/profile"
+          handleSubmitForm={handleSubmitForm}
           loggedIn={loggedIn}
-          onClickProfileExitLink={onClickProfileExitLink}>
+          onClickProfileExitLink={onClickProfileExitLink}
+          profileCorrect={profileCorrect}>
         </ProtectedRoute>
         <ProtectedRoute 
           component={SavedMovies}
@@ -106,14 +131,16 @@ function App() {
           path="/saved-movies"
           loggedIn={loggedIn}
           onClickLikeMovie={onClickLikeMovie}
-          onClickRemoveMovie={onClickRemoveMovie}>
+          onClickRemoveMovie={onClickRemoveMovie}
+          setFiltredMovies={setFiltredMovies}
+          filtredMovies={filtredMovies}>
         </ProtectedRoute>
       <Switch>
           <Route exact path="/">
             <Main/>
           </Route>
           <Route exact path="/signup">
-            <Register/>
+            <Register setLoggedIn={setLoggedIn}/>
           </Route>
           <Route exact path="/signin">
             <Login setLoggedIn={setLoggedIn}/>

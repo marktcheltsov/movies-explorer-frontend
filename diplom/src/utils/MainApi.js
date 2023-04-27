@@ -2,17 +2,7 @@ import { Promise } from "core-js";
 
  class Api {
     constructor(options) {
-        this._token = options.token;
         this._address = options.address;
-    }
-
-    _checkResult() {
-    return  (res) => {
-        if (res.status === 200) {
-            return res.json();
-          }
-          return Promise.reject(res.status);
-      }
     }
 
     getLikedMovies() {
@@ -21,8 +11,11 @@ import { Promise } from "core-js";
                 authorization: `Bearer ${localStorage.getItem('token')}`
             }
         }).then((res)=> {
-            return res
-        }).then(this._checkResult())
+            if (res.status === 200) {
+                return res.json();
+              }
+              return Promise.reject(res.status);
+        })
     }
 
     likeMovie(data) {
@@ -46,8 +39,11 @@ import { Promise } from "core-js";
                 country: data.country,
             })
         }).then((res)=> {
-            return res
-        }).then(this._checkResult())
+            if (res.status === 200) {
+                return res.json();
+              }
+              return Promise.reject(res.status);
+        })
     }
 
     deleteLikeMovie(id) {
@@ -58,8 +54,11 @@ import { Promise } from "core-js";
                 'Content-Type': 'application/json'
             }
         }).then((res)=> {
-            return res
-        }).then(this._checkResult())
+            if (res.status === 200) {
+                return res.json();
+              }
+            return Promise.reject(res.status);
+        })
     }
     
     getUserInfoFromServer() {
@@ -68,8 +67,11 @@ import { Promise } from "core-js";
                 authorization: `Bearer ${localStorage.getItem('token')}`,
             }
         }).then((res)=> {
-            return res
-        }).then(this._checkResult())
+            if (res.status === 200) {
+                return res.json();
+              }
+              return Promise.reject(res.status);
+        })
     }
 
     updateUser(name, email) {
@@ -84,27 +86,18 @@ import { Promise } from "core-js";
                 email: email
             })
         }).then((res)=> {
-            return res
-        }).then(this._checkResult())
+            if (res.status === 200) {
+                return res.json();
+              }
+              return Promise.reject(res.status);
+        })
     }
-
-
 }
+
 const setings = {
   address: 'https://diplomamarkuhaaa.nomoredomains.work',
-  token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE1OWNhOTBkODZiMzk3YTc3YmExZjMiLCJpYXQiOjE2NzkxMzgwMDcsImV4cCI6MTY3OTc0MjgwN30.Z9uTHLXTPk_KhGu1UZfYZ6RkhUgUftVfK0xqjkROI1E'
 }
-const myApi = new Api(setings)
-export default myApi
 
-//country
-//director
-//duration
-//year
-//description
-//image
-//trailerLink
-//thumbnail
-//movieId
-//nameRU
-//nameEN
+const myApi = new Api(setings)
+
+export default myApi
