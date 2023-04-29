@@ -26,6 +26,7 @@ function App() {
   const history = useHistory();
 
   function onClickLikeMovie(film) {
+    film.WasLiked = true
     setLikedMovies([film, ...likedMovies])
   }
 
@@ -39,6 +40,8 @@ function App() {
   function onClickProfileExitLink() {
     localStorage.clear()
     setLoggedIn(false)
+    setLikedMovies([])
+    setFiltredMovies([])
   }
 
   function handleSubmitForm(data) {
@@ -70,6 +73,7 @@ function App() {
       })
       myApi.getLikedMovies().then((res)=> {
         res.forEach(element => {element.liked = true});
+        setFiltredMovies(res)
         setLikedMovies(res)
     }).catch((err)=>{
         console.log(err)
