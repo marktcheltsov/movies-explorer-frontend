@@ -61,7 +61,7 @@ function MoviesCard({time, img, data, onClickLikeMovie, langOfSearch, onClickRem
                     <p className="film__description-name">{langOfSearch ? data.nameRU : data.nameEN}</p>
                     <p className="film__description-time">{filterTime(time)}</p>
                 </div>
-                <div className={`film__description-like-btn ${isliked ? 'film__description-like-btn_active' : ''} ${islikedCard ? 'film__description-like-btn_delete' : ''}`} onClick={renderLikeFunction}></div>
+                <div className={`film__description-like-btn ${isliked || data.WasLiked ? 'film__description-like-btn_active' : ''} ${islikedCard ? 'film__description-like-btn_delete' : ''}`} onClick={renderLikeFunction}></div>
             </div>
             <a href={data.trailerLink} target="_blank"><img src={`${data.liked ? img : `${`https://api.nomoreparties.co${img.url}`}`}`} alt="фильм" className="film__image"/></a>
         </div>
