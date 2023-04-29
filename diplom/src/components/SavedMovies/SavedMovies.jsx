@@ -4,6 +4,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { filterDuration, filterMovies, isCyrillic } from "../../utils/moviesFunctions";
 import Search from "../Search/Search";
 import './SavedMovies.css'
+import { useEffect } from "react";
 
 function SavedMovies({path, onClickLikeMovie, onClickRemoveMovie, movies, setFiltredMovies, filtredMovies}) {
     const [langOfSearch, setLangOfSearch] = useState(true)
@@ -19,7 +20,6 @@ function SavedMovies({path, onClickLikeMovie, onClickRemoveMovie, movies, setFil
             setErrorFilms(false);
             setErrorFilmsText('Ничего не найдено');
         } else {
-            localStorage.setItem('saved-movies', JSON.stringify({settings: settings, movies: newFilms}))
             setFiltredMovies(newFilms)
             setErrorFilms(true);
             setErrorFilmsText('');
