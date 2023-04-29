@@ -18,6 +18,7 @@ function Movies({setMovies, path, onClickLikeMovie, onClickRemoveMovie}) {
     const [errorFilm, setErrorFilm] = useState(true);
     const [errorFilmsText, setErrorFilmsText] = useState('');
     const [prelouder, setPrelouder] = useState(false);
+    
     let moviesSize = useResize();
 
     function HandlefilterMovies(data, settings) {

@@ -84,7 +84,15 @@
     margin: 0 auto 16px auto;
     cursor: pointer;
 }
+
+.profile__edit-btn_error {
+    opacity: 0.8;
+}
   
+.profile__edit-btn {
+    margin-bottom: 10px;
+}
+
 .profile__setings-btn:last-of-type {
     margin: 0 auto;
 }

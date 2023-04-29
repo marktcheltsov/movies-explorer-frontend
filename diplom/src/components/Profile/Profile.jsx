@@ -32,6 +32,7 @@ function Profile({path, onClickProfileExitLink, handleSubmitForm, profileCorrect
             return 
         } else {
             handleSubmitForm(data)
+            setFormDisabled(true)
         }
     }
 
@@ -81,7 +82,7 @@ function Profile({path, onClickProfileExitLink, handleSubmitForm, profileCorrect
                     </div>
                 </div>
             </div>
-            <button class={`profile__setings-btn profile__edit-btn`} disabled={formDisabled || hasError} type='submit'>{profileCorrect ? 'вы успешно обновили профиль' : 'редактировать'}</button>
+            <button class={`profile__setings-btn profile__edit-btn ${formDisabled || hasError ? 'profile__edit-btn_error' : ''}`} disabled={formDisabled || hasError} type='submit'>{profileCorrect ? 'вы успешно обновили профиль' : 'редактировать'}</button>
             </form>
             <button class="profile__setings-btn profile__exit-btn" onClick={onClickProfileExitLink}>Выйти из аккаунта</button>
         </section>
