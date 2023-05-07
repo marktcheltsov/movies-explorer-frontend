@@ -20,6 +20,7 @@ function MoviesCard({time, img, data, onClickLikeMovie, langOfSearch, onClickRem
 
     function removeLikeCard() {
         myApi.deleteLikeMovie(data._id).then((res)=> {
+            data.liked = false
             setIsliked(false)
             onClickRemoveMovie(data)
         }).catch((err)=>{
@@ -31,7 +32,8 @@ function MoviesCard({time, img, data, onClickLikeMovie, langOfSearch, onClickRem
         if (islikedCard) {
             removeLikeCard()
         } else {
-            if (isliked) {
+            if (isliked || data.WasLiked) {
+                console.log('dd')
                 removeLikeCard()
             } else {
                 AddLikeCard()

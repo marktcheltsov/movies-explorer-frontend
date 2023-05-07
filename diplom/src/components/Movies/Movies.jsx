@@ -10,7 +10,7 @@ import './Movies.css'
 
 
 function Movies({setMovies, path, onClickLikeMovie, onClickRemoveMovie}) {
-
+    
     const [langOfSearch, setLangOfSearch] = useState(true);
     const [filtredMovies, setFiltredMovies] = useState([]);
     const [moreBtnState, setMoreBtnState] = useState(false);
@@ -65,6 +65,7 @@ function Movies({setMovies, path, onClickLikeMovie, onClickRemoveMovie}) {
       }
 
     function handleSubmitForm(settings) {
+        console.log('ddd')
         getMovies(settings);
     }
 

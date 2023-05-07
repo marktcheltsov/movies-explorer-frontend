@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route } from "react-router-dom";
+import { Route, useLocation } from "react-router-dom";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { filterDuration, filterMovies, isCyrillic } from "../../utils/moviesFunctions";
 import Search from "../Search/Search";
@@ -10,25 +10,54 @@ function SavedMovies({path, onClickLikeMovie, onClickRemoveMovie, movies, setFil
     const [langOfSearch, setLangOfSearch] = useState(true)
     const [errorFilms, setErrorFilms] = useState(true)
     const [errorFilmsText, setErrorFilmsText] = useState('')
+    const location = useLocation();
+    const savedPath = location.pathname === "/saved-movies"
 
-    function filterCards(settings) {
-        let newFilms = movies.filter(film => filterMovies(film, settings.word, isCyrillic(settings.word), setLangOfSearch));
-        if (settings.btnValue) {
-            newFilms = movies.filter(film => filterDuration(film));
+    function filterCards(data, settings) {
+        let films = []
+        if (settings.word.length === 0) {
+            if (settings.btnValue) {
+                films = data.filter(film => filterDuration(film))
+            } else {
+                films = data
+            }
+            if (films.length === 0) {
+                setErrorFilms(false);
+                setErrorFilmsText('Ничего не найдено');
+            } else {
+                setErrorFilms(true);
+                setErrorFilmsText('');
+            }
+            return films
         }
-        if (newFilms.length === 0) {
+        if (settings.btnValue) {
+            films = data.filter(film => filterMovies(film, settings.word, isCyrillic(settings.word), setLangOfSearch)).filter(film => filterDuration(film));
+        } else {
+            films = data.filter(film => filterMovies(film, settings.word, isCyrillic(settings.word), setLangOfSearch));
+        }
+        if (films.length === 0) {
             setErrorFilms(false);
             setErrorFilmsText('Ничего не найдено');
         } else {
-            setFiltredMovies(newFilms)
             setErrorFilms(true);
             setErrorFilmsText('');
         }
+        return films
     }
+
+    function handleForm(settings) {
+        setFiltredMovies(filterCards(movies, settings))
+    }
+
+    useEffect(()=> {
+        if (savedPath) {
+            handleForm({word: '', btnValue: false})
+        }
+    }, [savedPath])
 
     return (
         <Route path={path}>
-            <Search handleSubmitForm={filterCards} setingsName={'saved-movies'} movies={filtredMovies}></Search>
+            <Search handleSubmitForm={handleForm} setingsName={'saved-movies'} movies={movies}></Search>
             {errorFilms ? (
                 <MoviesCardList 
                 movies={ filtredMovies } 

@@ -6,6 +6,7 @@ function MoviesCardList({movies, onClickLikeMovie, langOfSearch, onClickRemoveMo
     const [zeroMovies, setZeroMovies] = useState(true)
 
     useEffect(()=> {
+        console.log(movies)
         if (movies) {
             if (movies.length === 0) {
                 setZeroMovies(true)

@@ -27,10 +27,12 @@ function App() {
 
   function onClickLikeMovie(film) {
     film.WasLiked = true
+    setFiltredMovies([film, ...filtredMovies])
     setLikedMovies([film, ...likedMovies])
   }
 
   function onClickRemoveMovie(film) {
+    film.WasLiked = false
     setFiltredMovies((item) =>
     item.filter((element) => element !== film));
     setLikedMovies((item) =>
@@ -47,7 +49,6 @@ function App() {
   function handleSubmitForm(data) {
       if (!profileCorrect) {
         myApi.updateUser(data.name, data.email)
-        .catch(e => console.log(e))
         .then((res)=> {
           setСurrentUser(res)
           setProfileCorrect(true)
@@ -55,6 +56,7 @@ function App() {
             setProfileCorrect(false)
           }, 1500);
         })
+        .catch((e => console.log(e)))
       }
   }
 
