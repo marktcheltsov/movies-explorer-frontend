@@ -1,0 +1,16 @@
+@import url(../../vendor/fonts/fonts.css);
+@import url(../../vendor/normalize.css);
+
+.body {
+    margin: 0;
+  }
+  
+.app {
+    margin: 0 auto;
+    width: 100%;
+
+}
+
+.main-movies {
+  min-height: 650px;
+}

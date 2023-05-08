@@ -1,3 +1,7 @@
+https://www.figma.com/file/cASM20ikAsPlTi2doec68Q/Diploma?node-id=891%3A3857&t=NOTsckqhrlaDks2d-0
+https://github.com/marktcheltsov/movies-explorer-frontend/pull/2
+http://diplomamarkuhaaa.nomoredomains.work/movies
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
