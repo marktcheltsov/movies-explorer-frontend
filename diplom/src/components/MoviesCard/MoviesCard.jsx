@@ -33,7 +33,6 @@ function MoviesCard({time, img, data, onClickLikeMovie, langOfSearch, onClickRem
             removeLikeCard()
         } else {
             if (isliked || data.WasLiked) {
-                console.log('dd')
                 removeLikeCard()
             } else {
                 AddLikeCard()

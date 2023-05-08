@@ -17,33 +17,68 @@ import CurrentUserContext from "../../utils/UserContext";
 function App() {
   const [sliderMenuOpen, setSliderMenuOpen] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [filtredMovies, setFiltredMovies] = useState([]);
   const [likedMovies, setLikedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setСurrentUser] = useState({});
-  const [filtredMovies, setFiltredMovies] = useState([]);
+  const [filtredSavedMovies, setFiltredSavedMovies] = useState([]);
   const [profileCorrect, setProfileCorrect] = useState(false)
   const location = useLocation();
   const history = useHistory();
 
   function onClickLikeMovie(film) {
+    const storg = JSON.parse(localStorage.getItem('movies'))
+    if (storg) {
+    let films = storg.movies
+      films.forEach(element => {
+            if (film.id === element.id) {
+                element._id = film._id
+                element.WasLiked = true
+            }
+    });
+    localStorage.setItem('movies', JSON.stringify({settings: storg.settings, movies: films}))
+    }
     film.WasLiked = true
-    setFiltredMovies([film, ...filtredMovies])
+    setFiltredSavedMovies([film, ...filtredSavedMovies])
     setLikedMovies([film, ...likedMovies])
   }
 
   function onClickRemoveMovie(film) {
+    const storg = JSON.parse(localStorage.getItem('movies'))
+    if (storg) {
+    let films = storg.movies
+      films.forEach(element => {
+            if (film.id === element.id || film.movieId === element.id) {
+                element._id = film._id
+                element.WasLiked = false
+            }
+    });
+    if (location.pathname === "/saved-movies") {
+      movies.forEach(element => {
+        if (film.id === element.id || film.movieId === element.id) {
+            element._id = film._id
+            element.WasLiked = false
+        }
+    });
+    filtredMovies.forEach(element => {
+      if (film.movieId === element.id) {
+          element._id = film._id
+          element.WasLiked = false
+      }
+    });
+    }
+    localStorage.setItem('movies', JSON.stringify({settings: storg.settings, movies: films}))
+    }
     film.WasLiked = false
-    setFiltredMovies((item) =>
-    item.filter((element) => element !== film));
-    setLikedMovies((item) =>
-    item.filter((element) => element !== film));
+    setFiltredSavedMovies((item) => item.filter((element) => element.id !== film.id));
+    setLikedMovies((item) => item.filter((element) => element.id !== film.id));
   }
 
   function onClickProfileExitLink() {
     localStorage.clear()
     setLoggedIn(false)
     setLikedMovies([])
-    setFiltredMovies([])
+    setFiltredSavedMovies([])
   }
 
   function handleSubmitForm(data) {
@@ -75,7 +110,8 @@ function App() {
       })
       myApi.getLikedMovies().then((res)=> {
         res.forEach(element => {element.liked = true});
-        setFiltredMovies(res)
+        res.forEach(element => {element.id = element.movieId});
+        setFiltredSavedMovies(res)
         setLikedMovies(res)
     }).catch((err)=>{
         console.log(err)
@@ -120,7 +156,9 @@ function App() {
           loggedIn={loggedIn}
           onClickLikeMovie={onClickLikeMovie}
           onClickRemoveMovie={onClickRemoveMovie}
-          likedMovies={likedMovies}>
+          likedMovies={filtredSavedMovies}
+          filtredMovies={filtredMovies}
+          setFiltredMovies={setFiltredMovies}>
         </ProtectedRoute>
         <ProtectedRoute 
           component={Profile}
@@ -138,8 +176,8 @@ function App() {
           loggedIn={loggedIn}
           onClickLikeMovie={onClickLikeMovie}
           onClickRemoveMovie={onClickRemoveMovie}
-          setFiltredMovies={setFiltredMovies}
-          filtredMovies={filtredMovies}>
+          setFiltredMovies={setFiltredSavedMovies}
+          filtredMovies={filtredSavedMovies}>
         </ProtectedRoute>
       <Switch>
           <Route exact path="/">

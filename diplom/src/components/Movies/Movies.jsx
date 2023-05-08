@@ -9,10 +9,9 @@ import Search from "../Search/Search";
 import './Movies.css'
 
 
-function Movies({setMovies, path, onClickLikeMovie, onClickRemoveMovie}) {
+function Movies({setMovies, path, onClickLikeMovie, onClickRemoveMovie, likedMovies, filtredMovies, setFiltredMovies}) {
     
     const [langOfSearch, setLangOfSearch] = useState(true);
-    const [filtredMovies, setFiltredMovies] = useState([]);
     const [moreBtnState, setMoreBtnState] = useState(false);
     const [openedFilmsCounter, setOpenedFilmsCounter] = useState(0);
     const [errorFilm, setErrorFilm] = useState(true);
@@ -34,6 +33,14 @@ function Movies({setMovies, path, onClickLikeMovie, onClickRemoveMovie}) {
         } else {
             setErrorFilm(true)
         }
+        films.forEach(element => {
+            likedMovies.forEach((item)=> {
+                if (item.movieId === element.id || item.id === element.id) {
+                    element._id = item._id
+                    element.WasLiked = true
+                }
+            })
+        });
         return films
     }
 
@@ -65,7 +72,6 @@ function Movies({setMovies, path, onClickLikeMovie, onClickRemoveMovie}) {
       }
 
     function handleSubmitForm(settings) {
-        console.log('ddd')
         getMovies(settings);
     }
 
@@ -86,7 +92,16 @@ function Movies({setMovies, path, onClickLikeMovie, onClickRemoveMovie}) {
     useEffect(()=> {
         const storg = JSON.parse(localStorage.getItem('movies'))
         if (storg) {
-            setFiltredMovies(storg.movies)
+            let films = storg.movies
+            films.forEach(element => {
+                likedMovies.forEach((item)=> {
+                    if (item.movieId === element.id) {
+                        element._id = item._id
+                        element.WasLiked = true
+                    }
+                })
+            });
+            setFiltredMovies(films)
             if (moviesSize.width > 1150) {
                 setOpenedFilmsCounter(12);
             } else if (moviesSize.width <= 1150 && moviesSize.width > 720) {
